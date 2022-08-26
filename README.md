@@ -87,3 +87,19 @@ expo start -c
 ```batch
 npx tsc -w
 ```
+
+# How to debug
+
+## Download app `react-native-debugger`
+
+- Link: <https://github.com/jhen0409/react-native-debugger/releases>
+
+- Get version: `...universal.dmg`
+
+## Run Debug (Run this step before run `expo start`)
+
+- Open app `react-native-debugger` installed
+
+- `window + T` to open new tab
+
+- Add port: `19000` and Confirm
