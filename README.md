@@ -10,7 +10,7 @@ npx create-expo-app -t expo-template-blank-typescript
 
 - Base configuration: <https://docs.expo.dev/guides/typescript/#base-configuration>
 
-## Change main file
+## Change main file (* Shouldn't use this setup because the app need 2 times saving to effect changes in App file)
 
 - In new main file, add call function `registerRootComponent`
 
@@ -76,6 +76,14 @@ module.exports = function (api) {
 
 ## Run app
 
+- Run expo:
+
 ```batch
 expo start -c
+```
+
+- Run typescript checking
+
+```batch
+npx tsc -w
 ```
