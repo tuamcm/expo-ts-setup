@@ -8,6 +8,7 @@ const initialState: RepoState = {
   loading: ProcessStatus.idle,
   error: null,
   data: [],
+  searchText: "",
 };
 
 const RepoSlice = createSlice({
@@ -25,11 +26,14 @@ const RepoSlice = createSlice({
       state.loading = ProcessStatus.failed;
       state.error = action.payload;
     },
+    UpdateSearchText: (state, action: PayloadAction<string>) => {
+      state.searchText = action.payload;
+    },
   },
 });
 
 // Actions
-export const { RepoPending, RepoFulfilled, RepoRejected } = RepoSlice.actions;
+export const { RepoPending, RepoFulfilled, RepoRejected, UpdateSearchText } = RepoSlice.actions;
 
 // Selectors
 export const stateRepo = (state: RootState) => state.repo;

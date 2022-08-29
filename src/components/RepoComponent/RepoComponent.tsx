@@ -10,7 +10,7 @@ import {
   TouchableHighlight,
 } from "react-native";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { RepoPending, stateRepo } from "./repoSlice";
+import { RepoPending, stateRepo, UpdateSearchText } from "./repoSlice";
 import { ProcessStatus } from "./repoTypes";
 
 const renderItem: ListRenderItem<string> = ({ item, index, separators }) => {
@@ -31,14 +31,16 @@ const renderItem: ListRenderItem<string> = ({ item, index, separators }) => {
 
 const RepoComponent: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [text, setText] = useState<string>("");
-  const { loading, data, error } = useAppSelector(stateRepo);
+  const { loading, data, error, searchText } = useAppSelector(stateRepo);
+  const [text, setText] = useState<string>(searchText || "");
 
   const handleOnPress = () => {
+    dispatch(UpdateSearchText(text));
     dispatch(RepoPending(text));
   };
 
   const onRefresh = () => {
+    dispatch(UpdateSearchText(text));
     dispatch(RepoPending(text));
   };
 
@@ -49,7 +51,7 @@ const RepoComponent: React.FC = () => {
       <Text>{loading === ProcessStatus.pending ? "Loading..." : "NO"}</Text>
       <Button title="Press me" onPress={handleOnPress} />
       <FlatList
-        style={{backgroundColor: "#adadad"}}
+        style={{ backgroundColor: "#adadad" }}
         data={data}
         renderItem={renderItem}
         onRefresh={onRefresh}

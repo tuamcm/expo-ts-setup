@@ -12,4 +12,5 @@ export interface RepoState {
   loading: ProcessStatus;
   error: ProcessError;
   data: RepoData;
+  searchText: string;
 }
