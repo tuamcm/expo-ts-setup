@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,8 +10,8 @@ import {
   TouchableHighlight,
 } from "react-native";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { RepoPending, stateRepo, UpdateSearchText } from "./repoSlice";
-import { ProcessStatus } from "./repoTypes";
+import { RepoPending, UpdateSearchText, repoState } from "./repoSlice";
+import { ProcessStatus } from "app/common/types";
 
 const renderItem: ListRenderItem<string> = ({ item, index, separators }) => {
   return (
@@ -31,7 +31,7 @@ const renderItem: ListRenderItem<string> = ({ item, index, separators }) => {
 
 const RepoComponent: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { loading, data, error, searchText } = useAppSelector(stateRepo);
+  const { loading, data, error, searchText } = useAppSelector(repoState);
   const [text, setText] = useState<string>(searchText || "");
 
   const handleOnPress = () => {

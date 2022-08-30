@@ -1,23 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "app/store";
+import { AuthDataType, AuthInterface, authReducerName } from "./authTypes";
 import { ProcessError, ProcessStatus } from "app/common/types";
-import { RootState } from "../../app/store";
-import { RepoDataType, RepoInterface, repoReducerName } from "./repoTypes";
 
-const initialState: RepoInterface = {
+const initialState: AuthInterface = {
   loading: ProcessStatus.idle,
   error: null,
   data: [],
-  searchText: "",
+  isLogged: true,
 };
 
-const RepoSlice = createSlice({
-  name: repoReducerName,
+const AuthSlice = createSlice({
+  name: authReducerName,
   initialState,
   reducers: {
     RepoPending: (state, _: PayloadAction<string>) => {
       state.loading = ProcessStatus.pending;
     },
-    RepoFulfilled: (state, action: PayloadAction<RepoDataType>) => {
+    RepoFulfilled: (state, action: PayloadAction<AuthDataType>) => {
       state.loading = ProcessStatus.idle;
       state.data = action.payload;
     },
@@ -25,18 +25,14 @@ const RepoSlice = createSlice({
       state.loading = ProcessStatus.failed;
       state.error = action.payload;
     },
-    UpdateSearchText: (state, action: PayloadAction<string>) => {
-      state.searchText = action.payload;
-    },
   },
 });
 
 // Actions
-export const { RepoPending, RepoFulfilled, RepoRejected, UpdateSearchText } =
-  RepoSlice.actions;
+export const { RepoPending, RepoFulfilled, RepoRejected } = AuthSlice.actions;
 
 // Selectors
-export const repoState = (state: RootState) => state.repo;
+export const authState = (state: RootState) => state.auth;
 
 // Reducer
-export default RepoSlice.reducer;
+export default AuthSlice.reducer;

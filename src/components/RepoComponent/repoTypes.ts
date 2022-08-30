@@ -1,16 +1,12 @@
-// process
-export enum ProcessStatus {
-  "idle" = "idle",
-  "pending" = "pending",
-  "failed" = "failed",
-}
-export type ProcessError = string | null;
+import { ProcessError, ProcessStatus } from "app/common/types";
 
-// repo
-export type RepoData = string[];
-export interface RepoState {
+export const repoReducerName = "REPO";
+
+export type RepoDataType = string[];
+
+export interface RepoInterface {
   loading: ProcessStatus;
   error: ProcessError;
-  data: RepoData;
+  data: RepoDataType;
   searchText: string;
 }

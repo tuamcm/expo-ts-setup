@@ -1,20 +1,24 @@
-import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import React from "react";
-// import HomeComponent from "components/HomeComponent";
-import RepoComponent from "components/RepoComponent/RepoComponent";
+import { NavigationContainer } from "@react-navigation/native";
+import * as Linking from "expo-linking";
+import AuthNavigation from "navigation/AuthNavigation";
+// import BottomTabsNavigation from "navigation/BottomTabsNavigation";
+// import MainNavigation from "navigation/MainNavigation";
+
+const prefix = Linking.createURL("/");
 
 const Main: React.FC = () => {
+  const linking = {
+    prefixes: [prefix],
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
-      <RepoComponent />
-    </SafeAreaView>
+    <NavigationContainer linking={linking}>
+      <AuthNavigation />
+      {/* <BottomTabsNavigation /> */}
+      {/* <MainNavigation /> */}
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-});
 
 export default Main;

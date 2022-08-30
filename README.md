@@ -120,7 +120,7 @@ npx tsc -w
 
 - Link: <https://www.npmjs.com/package/@react-native-async-storage/async-storage>
 
-## Install packages
+## Installation
 
 ```bash
 npm i @react-native-async-storage/async-storage redux-persist
@@ -170,4 +170,155 @@ export default function App() {
     </Provider>
   );
 }
+```
+
+# IMPLEMENT - How to use Navigation in React Native
+
+## Reference Navigation
+
+- Link: <https://reactnavigation.org/docs/getting-started>
+- Link: <https://reactnavigation.org/docs/hello-react-navigation>
+- Link (typescript): <https://reactnavigation.org/docs/typescript/>
+- Link : <https://reactnavigation.org/docs/getting-started>
+
+## Installation Navigation
+
+```bash
+npm install @react-navigation/native @react-navigation/native-stack
+```
+
+```bash
+expo install react-native-screens react-native-safe-area-context
+```
+
+## Add types check typescript
+
+- Path: `src/app/navigation/types.ts`
+
+```typescript
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+export type RootStackParamList = {
+  Home: { userId: string } | undefined;
+  Repo: undefined;
+  Article: undefined;
+};
+
+export type HomeScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Home"
+>;
+```
+
+## Use hook `useNavigation`
+
+- Path: `src/components/ArticleComponent.tsx`
+
+```typescript
+...
+import { useNavigation } from "@react-navigation/native";
+import { HomeScreenNavigationProp } from "app/navigation/types";
+
+const ArticleComponent: React.FC = () => {
+  ...
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+  ...
+  return (
+    <View>
+      ...
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Repo")}
+        style={{ padding: 20, backgroundColor: "#ffddee", width: "50%" }}
+      >
+        <Text>Go to Repo </Text>
+      </TouchableOpacity>
+     ...
+    </View>
+  );
+};
+```
+
+## Authentication flows
+
+```typescript
+const MainNavigation: React.FC = () => {
+  ...
+  const { isLogged } = useAppSelector(authState); // redux get login value
+
+  return (
+    <NavigationContainer linking={linking}>
+      <Stack.Navigator
+        initialRouteName={!isLogged ? "Home" : "Article"}
+      >
+        {!isLogged ? (
+          <>
+            <Stack.Screen name="Home" component={HomeComponent} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="Article" component={ArticleComponent} />
+            <Stack.Screen name="Repo" component={RepoComponent} />
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+```
+
+## React Navigation lifecycle events
+
+- Reference: <https://reactnavigation.org/docs/navigation-lifecycle#react-navigation-lifecycle-events>
+
+```typescript
+import { useFocusEffect } from '@react-navigation/native';
+...
+
+function Profile() {
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
+
+  return <ProfileContent />;
+}
+```
+
+
+
+
+
+# __Note typescript__
+
+1. Extracting types of props
+
+- Reference: <https://github.com/expo/vector-icons/issues/153#issuecomment-787130328>
+- Extracting types of props on a component is a pretty common thing to do when using react libraries with typescript, so you can use this common pattern:
+- Use pattern: `React.ComponentProps<typeof ObjectNeedExtract>['name']`
+- Example:
+
+```typescript
+type MaterialIconName = React.ComponentProps<typeof MaterialIcons>['name'];
+const iconName: MaterialIconName =  '3d-rotation'
+```
+
+2. Get `StyleProp`
+
+- Reference:
+- <https://medium.com/@zvona/stylesheets-in-react-native-with-typescript-revisited-6b4ba0a899d2>
+- <https://medium.com/@zvona/react-native-and-typescript-meets-styles-b727ecf7e677>
+
+```typescript
+import { StyleProp, TextStyle, ViewStyle, ImageStyle } from "react-native";
+...
+
+BlockViewStyle: StyleProp<ViewStyle>;
+InputTextStyle: StyleProp<TextStyle>;
+InputImageStyle: StyleProp<ImageStyle>;
 ```
