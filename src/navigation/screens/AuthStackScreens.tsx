@@ -12,6 +12,7 @@ const AuthStackScreens = () => {
         component={ArticleComponent}
         options={{
           title: "Article FDX",
+          headerTitleStyle: { fontFamily: "Inter_900Black" },
         }}
       />
       <AuthStack.Screen
@@ -19,6 +20,7 @@ const AuthStackScreens = () => {
         component={RepoComponent}
         options={{
           title: "My Repo",
+          headerTitleStyle: { fontFamily: "Inter_900Black" },
         }}
       />
     </AuthStack.Navigator>

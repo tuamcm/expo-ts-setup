@@ -290,6 +290,144 @@ function Profile() {
 }
 ```
 
+# Splash Screen
+
+## Installation `expo-splash-screen`
+
+- Reference: <https://docs.expo.dev/versions/latest/sdk/splash-screen/>
+
+```bash
+expo install expo-splash-screen
+```
+
+## Setup `expo-splash-screen`
+
+- We should setup the package in NavigationContainer to effect navigation fast
+
+```typescript
+...
+import * as SplashScreen from "expo-splash-screen";
+
+// disable auto hide splash screen
+// we should hide splash screen after we have loaded all resource what the app need to run
+SplashScreen.preventAutoHideAsync();
+...
+
+const Main = () => {
+  ...
+
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        // Pre-load fonts, make any API calls you need to do here
+        await Font.loadAsync({
+          Inter_900Black,
+          Roboto_300Light,
+          Roboto_100Thin_Italic,
+        });
+
+        // Artificially delay for two seconds to simulate a slow loading
+        // experience. Please remove this if you copy and paste the code!
+        // await new Promise((resolve) => setTimeout(resolve, 3000));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
+
+  const hideSplashScreen = async () => {
+    // wait for NavigationContainer effect
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    // hide the splash screen
+    await SplashScreen.hideAsync();
+  };
+
+  // we don't show anything when the app is not ready
+  // because the navigation will run before the app load full resources such as font
+  if (!appIsReady) {
+    return null;
+  }
+
+  return (
+    <NavigationContainer linking={linking} onReady={hideSplashScreen}>
+      <AuthNavigation />
+    </NavigationContainer>
+  );
+};
+
+export default Main;
+```
+
+# Font
+
+- Reference: <https://docs.expo.dev/versions/latest/sdk/font/>
+- <https://docs.expo.dev/guides/using-custom-fonts/>
+- <https://github.com/expo/google-fonts>
+- <https://directory.vercel.app/>
+
+## Installation 
+
+```bash
+expo install expo-font @expo-google-fonts/inter
+```
+
+## Setup load fonts
+
+```typescript
+  ...
+  import * as Font from "expo-font";
+  import { Inter_900Black } from "@expo-google-fonts/inter";
+  ...
+
+  const customFonts = {
+    "Combo-Regular": require("./../assets/fonts/Combo-Regular.ttf"),
+    "DancingScript-Regular": require("./../assets/fonts/DancingScript-Regular.ttf"),
+  };
+
+  const importFonts = {
+    Inter_900Black,
+    Roboto_300Light,
+    Roboto_100Thin_Italic,
+  };
+
+  ...
+  useEffect(() => {
+    async function prepare() {
+      try {
+        // 1. Pre-load fonts, make any API calls you need to do here
+        await Font.loadAsync(importFonts);
+
+        // 2. Load custom fonts
+        // We need to add the fonts inside the `assets folder`
+        await Font.loadAsync(customFonts);
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
+```
+
+
+
+
+
+# Getting Started With GraphQL.js
+
+- Reference: <https://graphql.org/graphql-js/>
+
+
+
+
 
 
 
