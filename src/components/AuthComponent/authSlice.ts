@@ -14,14 +14,15 @@ const AuthSlice = createSlice({
   name: authReducerName,
   initialState,
   reducers: {
-    RepoPending: (state, _: PayloadAction<string>) => {
+    AuthPending: (state) => {
       state.loading = ProcessStatus.pending;
+      state.isLogged = true;
     },
-    RepoFulfilled: (state, action: PayloadAction<AuthDataType>) => {
+    AuthFulfilled: (state, action: PayloadAction<AuthDataType>) => {
       state.loading = ProcessStatus.idle;
       state.data = action.payload;
     },
-    RepoRejected: (state, action: PayloadAction<ProcessError>) => {
+    AuthRejected: (state, action: PayloadAction<ProcessError>) => {
       state.loading = ProcessStatus.failed;
       state.error = action.payload;
     },
@@ -29,7 +30,7 @@ const AuthSlice = createSlice({
 });
 
 // Actions
-export const { RepoPending, RepoFulfilled, RepoRejected } = AuthSlice.actions;
+export const { AuthPending, AuthFulfilled, AuthRejected } = AuthSlice.actions;
 
 // Selectors
 export const authState = (state: RootState) => state.auth;
