@@ -8,7 +8,7 @@ import { RootStackParamList } from "./configs/types";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const MainNavigation: React.FC = () => {
+const MainNavigation = (): JSX.Element => {
   return (
     <Stack.Navigator initialRouteName={initRouteNameNotAuth}>
       <Stack.Screen

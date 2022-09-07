@@ -295,6 +295,7 @@ function Profile() {
 ## Installation `expo-splash-screen`
 
 - Reference: <https://docs.expo.dev/versions/latest/sdk/splash-screen/>
+- <https://github.com/expo/examples/blob/master/with-splash-screen/App.js>
 
 ```bash
 expo install expo-splash-screen

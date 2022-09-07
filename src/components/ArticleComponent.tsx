@@ -4,11 +4,12 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { HomeScreenNavigationProp } from "navigation/configs/types";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { AuthPending, authState } from "./AuthComponent/authSlice";
+import { AuthInterface } from "./AuthComponent/authTypes";
 
-const ArticleComponent: React.FC = () => {
+const ArticleComponent = (): JSX.Element => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const dispatch = useAppDispatch();
-  const { loading, data, error } = useAppSelector(authState);
+  const { loading, data, error } = useAppSelector<AuthInterface>(authState);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -23,7 +24,7 @@ const ArticleComponent: React.FC = () => {
     }, [])
   );
 
-  const handlePressApiGraphql = () => {
+  const handlePressApiGraphql = (): void => {
     console.log(">>> handlePressApiGraphql >>>");
     dispatch(AuthPending());
   };
@@ -62,7 +63,15 @@ const ArticleComponent: React.FC = () => {
         onPress={handlePressApiGraphql}
         style={{ padding: 20, backgroundColor: "#cdcdcd", width: "100%" }}
       >
-        <Text style={{ fontFamily: "DancingScript-Regular" }}>Call API Graphql </Text>
+        <Text style={{ fontFamily: "DancingScript-Regular" }}>
+          Call API Graphql
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Camera")}
+        style={{ padding: 20, backgroundColor: "pink", width: "30%" }}
+      >
+        <Text style={{ fontFamily: "DancingScript-Regular" }}>Camera </Text>
       </TouchableOpacity>
     </View>
   );

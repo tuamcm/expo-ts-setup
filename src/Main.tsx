@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, LinkingOptions } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
@@ -17,7 +17,7 @@ import AuthNavigation from "navigation/AuthNavigation";
 // Can not use inside the function, it won't work
 SplashScreen.preventAutoHideAsync();
 
-const prefix = Linking.createURL("/");
+const prefix: string = Linking.createURL("/");
 
 const customFonts = {
   "Combo-Regular": require("./../assets/fonts/Combo-Regular.ttf"),
@@ -30,15 +30,15 @@ const importFonts = {
   Roboto_100Thin_Italic,
 };
 
-const Main = () => {
-  const linking = {
+const Main = (): JSX.Element | null => {
+  const linking: LinkingOptions<ReactNavigation.RootParamList> = {
     prefixes: [prefix],
   };
 
-  const [appIsReady, setAppIsReady] = useState(false);
+  const [appIsReady, setAppIsReady] = useState<boolean>(false);
 
   useEffect(() => {
-    async function prepare() {
+    async function prepare(): Promise<void> {
       try {
         // Pre-load fonts, make any API calls you need to do here
         await Font.loadAsync(importFonts);
@@ -59,7 +59,7 @@ const Main = () => {
     prepare();
   }, []);
 
-  const hideSplashScreen = async () => {
+  const hideSplashScreen = async (): Promise<void> => {
     console.log("-- onReady NavigationContainer -- ");
     // wait for NavigationContainer effect
     await new Promise((resolve) => setTimeout(resolve, 200));

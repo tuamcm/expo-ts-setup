@@ -12,6 +12,7 @@ import {
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { RepoPending, UpdateSearchText, repoState } from "./repoSlice";
 import { ProcessStatus } from "app/common/types";
+import { RepoInterface } from "./repoTypes";
 
 const renderItem: ListRenderItem<string> = ({ item, index, separators }) => {
   return (
@@ -29,17 +30,18 @@ const renderItem: ListRenderItem<string> = ({ item, index, separators }) => {
   );
 };
 
-const RepoComponent: React.FC = () => {
+const RepoComponent = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { loading, data, error, searchText } = useAppSelector(repoState);
+  const { loading, data, error, searchText }: RepoInterface =
+    useAppSelector<RepoInterface>(repoState);
   const [text, setText] = useState<string>(searchText || "");
 
-  const handleOnPress = () => {
+  const handleOnPress = (): void => {
     dispatch(UpdateSearchText(text));
     dispatch(RepoPending(text));
   };
 
-  const onRefresh = () => {
+  const onRefresh = (): void => {
     dispatch(UpdateSearchText(text));
     dispatch(RepoPending(text));
   };
