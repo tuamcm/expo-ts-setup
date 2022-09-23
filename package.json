@@ -32,7 +32,9 @@
     "react-native-web": "~0.18.7",
     "react-redux": "^8.0.2",
     "redux-persist": "^6.0.0",
-    "redux-saga": "^1.2.1"
+    "redux-saga": "^1.2.1",
+    "expo-camera": "~12.3.0",
+    "expo-device": "~4.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

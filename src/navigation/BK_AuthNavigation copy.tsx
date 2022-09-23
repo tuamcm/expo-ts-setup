@@ -22,7 +22,6 @@ const AuthNavigation: React.FC = () => {
           <Stack.Screen
             name="Home"
             component={HomeComponent}
-            initialParams={{ userId: "123" }}
           />
         </>
       ) : (

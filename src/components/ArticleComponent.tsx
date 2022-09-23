@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { HomeScreenNavigationProp } from "navigation/configs/types";
+import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
+import { ArticleRouteProp, HomeScreenNavigationProp } from "navigation/configs/types";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { AuthPending, authState } from "./AuthComponent/authSlice";
 import { AuthInterface } from "./AuthComponent/authTypes";
+import CameraModal from "camera/CameraModal";
+import ActionModal from "camera/ActionModal";
 
 const ArticleComponent = (): JSX.Element => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const dispatch = useAppDispatch();
   const { loading, data, error } = useAppSelector<AuthInterface>(authState);
+  const route = useRoute<ArticleRouteProp>();
 
   useFocusEffect(
     React.useCallback(() => {
@@ -28,6 +31,12 @@ const ArticleComponent = (): JSX.Element => {
     console.log(">>> handlePressApiGraphql >>>");
     dispatch(AuthPending());
   };
+
+  useEffect(() => {
+    console.log("route.params?.photo");
+    console.log(route.params?.photo);
+    console.log("route.params?.photo");
+  }, [route])
 
   return (
     <View>
@@ -73,6 +82,8 @@ const ArticleComponent = (): JSX.Element => {
       >
         <Text style={{ fontFamily: "DancingScript-Regular" }}>Camera </Text>
       </TouchableOpacity>
+      {/* <CameraModal></CameraModal> */}
+      <ActionModal></ActionModal>
     </View>
   );
 };

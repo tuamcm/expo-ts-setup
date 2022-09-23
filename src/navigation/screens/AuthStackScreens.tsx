@@ -1,10 +1,11 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ArticleComponent from "components/ArticleComponent";
 import RepoComponent from "components/RepoComponent/RepoComponent";
+import CameraComponent from "camera/CameraComponent";
 
 const AuthStack = createNativeStackNavigator();
 
-const AuthStackScreens = () => {
+const AuthStackScreens = (): JSX.Element => {
   return (
     <AuthStack.Navigator initialRouteName="Article">
       <AuthStack.Screen
@@ -20,6 +21,14 @@ const AuthStackScreens = () => {
         component={RepoComponent}
         options={{
           title: "My Repo",
+          headerTitleStyle: { fontFamily: "Inter_900Black" },
+        }}
+      />
+      <AuthStack.Screen
+        name="Camera"
+        component={CameraComponent}
+        options={{
+          title: "My Camera",
           headerTitleStyle: { fontFamily: "Inter_900Black" },
         }}
       />

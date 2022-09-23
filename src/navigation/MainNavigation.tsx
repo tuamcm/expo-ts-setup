@@ -14,7 +14,6 @@ const MainNavigation = (): JSX.Element => {
       <Stack.Screen
         name="Home"
         component={HomeComponent}
-        initialParams={{ userId: "123" }}
       />
       <Stack.Screen name="Article" component={ArticleComponent} />
       <Stack.Screen name="Repo" component={RepoComponent} />
