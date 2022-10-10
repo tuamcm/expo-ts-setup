@@ -38,7 +38,7 @@ const ActionModal = (): JSX.Element => {
         handleSavePicture={__handleSavePicture}
       />
       <TouchableOpacity style={styles.btnShowModal} onPress={__handleShowModal}>
-        <Text style={styles.btnText}>Show Modal</Text>
+        <Text style={styles.txtTitleBtnShow}>Show Modal</Text>
       </TouchableOpacity>
     </View>
   );
