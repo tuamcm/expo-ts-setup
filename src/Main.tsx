@@ -9,6 +9,7 @@ import {
   Roboto_100Thin_Italic,
 } from "@expo-google-fonts/roboto";
 import AuthNavigation from "navigation/AuthNavigation";
+import DrawerNavigation from "navigation/DrawerNavigation";
 // import BottomTabsNavigation from "navigation/BottomTabsNavigation";
 // import MainNavigation from "navigation/MainNavigation";
 
@@ -75,7 +76,8 @@ const Main = (): JSX.Element | null => {
 
   return (
     <NavigationContainer linking={linking} onReady={hideSplashScreen}>
-      <AuthNavigation />
+      <DrawerNavigation/>
+      {/* <AuthNavigation /> */}
       {/* <BottomTabsNavigation /> */}
       {/* <MainNavigation /> */}
     </NavigationContainer>

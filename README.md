@@ -418,6 +418,9 @@ expo install expo-font @expo-google-fonts/inter
   }, []);
 ```
 
+## Notes
+
+- Android: can not use "bold" with "fontFamily", it will be error that the "fontFamily" can not apply to the css
 
 
 
