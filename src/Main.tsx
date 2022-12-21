@@ -10,7 +10,8 @@ import {
 } from "@expo-google-fonts/roboto";
 import AuthNavigation from "navigation/AuthNavigation";
 import DrawerNavigation from "navigation/DrawerNavigation";
-// import BottomTabsNavigation from "navigation/BottomTabsNavigation";
+import BottomTabsNavigation from "navigation/BottomTabsNavigation";
+import MainTabsNavigation from "navigation/MainTabsNavigation";
 // import MainNavigation from "navigation/MainNavigation";
 
 // Disable auto hide splash screen
@@ -76,10 +77,11 @@ const Main = (): JSX.Element | null => {
 
   return (
     <NavigationContainer linking={linking} onReady={hideSplashScreen}>
-      <DrawerNavigation/>
+      {/* <DrawerNavigation/> */}
       {/* <AuthNavigation /> */}
       {/* <BottomTabsNavigation /> */}
       {/* <MainNavigation /> */}
+      <MainTabsNavigation />
     </NavigationContainer>
   );
 };

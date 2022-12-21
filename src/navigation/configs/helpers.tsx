@@ -24,4 +24,9 @@ export const defaultTabBarOptions = (iconName: IoniconsName) => ({
   tabBarInactiveTintColor: colors.inactive,
   tabBarLabelStyle: tabConfigs.tabBarLabelStyle,
   tabBarBadgeStyle: tabConfigs.tabBarBadgeStyle,
+  tabBarShowLabel: false,
+  headerTintColor: "#000", //Set Header text color
+  // headerStyle: {
+  //   backgroundColor: colors.active, //Set Header color
+  // },
 });

@@ -10,7 +10,7 @@ export interface TabBarIcon {
 }
 
 export const colors: Types.ColorsType = {
-  active: "#00d8ff",
+  active: "#5B9EE1",
   inactive: "gray",
 };
 
